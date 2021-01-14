@@ -7,7 +7,7 @@ function getOctokitClient() {
 }
 
 async function getWhoms(client) {
-  const whoms = core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim()).map((m) => {
+  const whoms = await core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim()).map(async (m) => {
     if (m.indexOf("@") === 0) {
       console.log(`Should look up ${m}`);
       const members = await octokit.teams.listMembersInOrg({
