@@ -18,6 +18,8 @@
   "homepage": "https://github.com/remind101/action-require-reviewer#readme",
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
+    "@actions/github": "^4.0.0",
+    "lodash": "^4.17.20",
+    "tsc": "^1.20150623.0"
   }
 }
