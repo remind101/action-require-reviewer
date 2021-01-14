@@ -1,0 +1,23 @@
+{
+  "name": "action-require-reviewer",
+  "version": "1.0.0",
+  "description": "Check for a user/group to have reviewed a pull request",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/remind101/action-require-reviewer.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/remind101/action-require-reviewer/issues"
+  },
+  "homepage": "https://github.com/remind101/action-require-reviewer#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  }
+}

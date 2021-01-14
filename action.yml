@@ -8,7 +8,5 @@ outputs:
   missing:
     description: 'Missing reviewers'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  using: 'node12'
+  main: 'index.js'
