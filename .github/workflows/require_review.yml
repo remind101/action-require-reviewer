@@ -14,3 +14,4 @@ jobs:
       uses: remind101/action-require-reviewer@main
       with:
         whom: june-remind101
+        GITHUB_TOKEN: github.token

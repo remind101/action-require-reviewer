@@ -10,6 +10,10 @@ async function getWhoms(client) {
   const whoms = core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim()).map((m) => {
     if (m.indexOf("@") === 0) {
       client.info(`Should look up ${m}`);
+      // octokit.teams.listMembersInOrg({
+      //   org,
+      //   team_slug,
+      // });
       return m
     }
     return m;
