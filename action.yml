@@ -1,7 +1,10 @@
 name: 'Require Reviewer'
 description: 'Require a reviewer'
 inputs:
-  whom:  # comma list of reviewers required
+  GITHUB_TOKEN:
+    description: "Github token"
+    required: true
+  whoms:  # comma list of reviewers required
     description: 'Comma separated list of reviewers'
     required: true
 outputs:
