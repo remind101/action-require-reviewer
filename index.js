@@ -9,11 +9,12 @@ function getOctokitClient() {
 async function getWhoms(client) {
   const whoms = core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim()).map((m) => {
     if (m.indexOf("@") === 0) {
-      client.info(`Should look up ${m}`);
-      // octokit.teams.listMembersInOrg({
-      //   org,
-      //   team_slug,
-      // });
+      console.log(`Should look up ${m}`);
+      const members = await octokit.teams.listMembersInOrg({
+        org: github.context.repo.owner,
+        team_slug: m,
+      });
+      console.log(`members: ${JSON.stringify(members)}`);
       return m
     }
     return m;
