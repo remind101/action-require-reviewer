@@ -14,4 +14,4 @@ jobs:
       uses: remind101/action-require-reviewer@pull_request
       with:
         whoms: june-remind101,@empire-users
-        GITHUB_TOKEN: env.AUTH_GITHUB_TOKEN
+        GITHUB_TOKEN: secrets.AUTH_GITHUB_TOKEN
