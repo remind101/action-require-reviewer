@@ -1,0 +1,16 @@
+on: ['push']
+  # push:
+  #   branches-ignore:
+  #     - 'master'
+  #     - 'main'
+
+jobs:
+  require_review:
+    runs-on: ubuntu-latest
+    name: Requires Review
+    steps:
+    - name: Check
+      id: hello
+      uses: remind101/action-require-reviewer@main
+      with:
+        whom: june-remind101
