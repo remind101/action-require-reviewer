@@ -7,7 +7,9 @@ function getOctokitClient() {
 }
 
 async function getWhoms(client) {
-  const whoms = await core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim()).map(async (m) => {
+  const parsedWhoms = await core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim());
+  const whoms = Promise.all(parsedWhoms.map(async (m) => {
+    console.log(`looking up: ${m}`);
     if (m.indexOf("@") === 0) {
       console.log(`Should look up ${m}`);
       const members = await client.teams.listMembersInOrg({
@@ -18,7 +20,7 @@ async function getWhoms(client) {
       return m;
     }
     return m;
-  });
+  }));
 
   console.log(`whoms: ${JSON.stringify(whoms)}`);
 }
