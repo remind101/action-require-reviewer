@@ -11,16 +11,16 @@ async function getWhoms(client) {
     if (m.indexOf("@") === 0) {
       console.log(`Should look up ${m}`);
       const members = await client.teams.listMembersInOrg({
-        org: github.context.repo.owner,
-        team_slug: m,
+        org: github.context.payload.organization.login,
+        team_slug: m.substring(1),
       });
       console.log(`members: ${JSON.stringify(members)}`);
-      return m
+      return m;
     }
     return m;
   });
 
-  client.info(`whoms: ${JSON.stringify(whoms)}`);
+  console.log(`whoms: ${JSON.stringify(whoms)}`);
 }
 
 async function main() {
