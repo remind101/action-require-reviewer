@@ -19,7 +19,10 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "lodash": "^4.17.20",
-    "tsc": "^1.20150623.0"
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@tsconfig/node12": "^1.0.7",
+    "typescript": "^4.1.3"
   }
 }
