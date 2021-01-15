@@ -1,3 +1,3 @@
 #!/bin/bash
 
-node ./dist/index.js
+node /app/dist/index.js
