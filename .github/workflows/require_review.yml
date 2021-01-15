@@ -1,4 +1,4 @@
-on: ['pull_request']
+on: ['pull_request','pull_request_review']
   # push:
   #   branches-ignore:
   #     - 'master'
@@ -10,7 +10,7 @@ jobs:
     name: Requires Review
     steps:
     - name: Check
-      id: hello
+      id: require_review
       uses: remind101/action-require-reviewer@pull_request
       with:
         whoms: june-remind101,@empire-users

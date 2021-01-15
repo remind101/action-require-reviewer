@@ -3,23 +3,27 @@ import * as github from '@actions/github';
 import { context, GitHub } from '@actions/github/lib/utils';
 import { flatten, intersection } from 'lodash';
 
+/**
+ * Get the github client with auth
+ */
 function getOctokitClient(): InstanceType<typeof GitHub> {
   const token = core.getInput("GITHUB_TOKEN", { required: true });
   return github.getOctokit(token);
 }
 
+/**
+ * Process the `whoms` to a complete list of github users
+ * @param client github client
+ */
 async function getWhoms(client:InstanceType<typeof GitHub> ): Promise<string[]> {
   const parsedWhoms = await core.getInput("WHOMS", { required: true}).split(',').map((m) => m.trim());
   const whoms = await Promise.all(parsedWhoms.map(async (m) => {
-    console.log(`looking up: ${m}`);
     if (m.indexOf("@") === 0) {
-      console.log(`Should look up ${m}`);
       const members = await client.teams.listMembersInOrg({
         org: github.context.payload.organization.login,
         team_slug: m.substring(1),
       });
       const githubMembers = members.data.map((m) => m ? m.login: '');
-      console.log(`members: ${JSON.stringify(githubMembers)}`);
       return githubMembers;
     }
     return m;
@@ -27,6 +31,11 @@ async function getWhoms(client:InstanceType<typeof GitHub> ): Promise<string[]> 
   return flatten(whoms);
 }
 
+/**
+ *
+ * @param client github client
+ * @param whoms 
+ */
 async function getReviews(client:InstanceType<typeof GitHub>, whoms: string[]): Promise<string[]> {
   // GITHUB_REF refs/pull/:prNumber/merge
   const reviews = await client.pulls.listReviews({

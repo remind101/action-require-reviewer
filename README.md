@@ -20,17 +20,17 @@ Missing reviews from
 
 ## Example usage
 
-Add an auth token with the correct permissions (see above) to your secrets as `AUTH_GITHUB_TOKEN` 
+Add an auth token with the correct permissions (see above) to your secrets as `AUTH_GITHUB_TOKEN`
 
 ```
-on: ['pull_request']
+on: ['pull_request','pull_request_review]
 
 jobs:
   require_review:
     runs-on: ubuntu-latest
     name: Requires Review
     steps:
-    - name: Check
+    - name: Check reviewers
       uses: remind101/action-require-reviewer@v1
       with:
         whoms: user,@team
