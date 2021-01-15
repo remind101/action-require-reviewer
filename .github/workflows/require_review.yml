@@ -1,4 +1,4 @@
-on: ['push']
+on: ['pull_request','pull_request_review']
   # push:
   #   branches-ignore:
   #     - 'master'
@@ -10,8 +10,8 @@ jobs:
     name: Requires Review
     steps:
     - name: Check
-      id: hello
-      uses: remind101/action-require-reviewer@main
+      id: require_review
+      uses: remind101/action-require-reviewer@pull_request
       with:
-        whoms: june-remind101,@empire-users
-        GITHUB_TOKEN: env.AUTH_GITHUB_TOKEN
+        whoms: june-remind101,@empire-users,aengelas
+        GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}

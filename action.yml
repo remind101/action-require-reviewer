@@ -11,5 +11,6 @@ outputs:
   missing:
     description: 'Missing reviewers'
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: 'docker'
+  image: 'Dockerfile'
+
