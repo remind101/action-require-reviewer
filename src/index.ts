@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { context, GitHub } from '@actions/github/lib/utils';
-import { flatten } from 'lodash';
+import { flatten, intersection } from 'lodash';
 
 function getOctokitClient(): InstanceType<typeof GitHub> {
   const token = core.getInput("GITHUB_TOKEN", { required: true });
@@ -42,9 +42,14 @@ async function getReviews(client:InstanceType<typeof GitHub>, whoms: string[]): 
 async function main() {
   const client = getOctokitClient();
   const whoms = await getWhoms(client);
-  console.log('whoms:', whoms);
-  const reviews = await getReviews(client, whoms);
-  console.log('reviews:', reviews);
+  console.log('who is expected to review:', whoms);
+  const reviewers = await getReviews(client, whoms);
+  console.log('folks who have reviewed:', reviewers);
+  const acceptedReviewers = intersection(whoms, reviewers)
+  console.log('matching accepted reviewers:', acceptedReviewers);
+  if (acceptedReviewers.length === 0) {
+    process.exit(1);
+  }
 }
 
 main().then(() => {
