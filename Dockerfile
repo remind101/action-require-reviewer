@@ -6,4 +6,4 @@ WORKDIR /app
 
 RUN yarn && yarn tsc
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/app/entrypoint.sh" ]

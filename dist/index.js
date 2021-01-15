@@ -57,9 +57,9 @@ async function getReviews(client, whoms) {
 async function main() {
     const client = getOctokitClient();
     const whoms = await getWhoms(client);
-    console.log(whoms);
+    console.log('whoms:', whoms);
     const reviews = await getReviews(client, whoms);
-    console.log(reviews);
+    console.log('reviews:', reviews);
 }
 main().then(() => {
     console.log('success');
