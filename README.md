@@ -4,9 +4,13 @@ Check for a user/group to have reviewed a pull request
 
 ## Inputs
 
-### `whom`
+### `whoms`
 
 **Required** Github user names or org groups. e.g. `username` or `@org/group`
+
+### `GITHUB_TOKEN`
+
+**Required** A token with the following permissions is required for organization related checks: `read:org` and `repo:status`
 
 ## Outputs
 
@@ -16,6 +20,14 @@ Missing reviews from
 
 ## Example usage
 
-uses: remind101/action-require-reviewer@v1
-with:
-  whom: 'username'
+jobs:
+  require_review:
+    runs-on: ubuntu-latest
+    name: Requires Review
+    steps:
+    - name: Check
+      uses: remind101/action-require-reviewer@v1
+      with:
+        whoms: user,@team
+        GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
+
