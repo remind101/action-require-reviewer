@@ -20,6 +20,11 @@ Missing reviews from
 
 ## Example usage
 
+Add an auth token with the correct permissions (see above) to your secrets as `AUTH_GITHUB_TOKEN` 
+
+```
+on: ['pull_request']
+
 jobs:
   require_review:
     runs-on: ubuntu-latest
@@ -30,4 +35,4 @@ jobs:
       with:
         whoms: user,@team
         GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
-
+```
