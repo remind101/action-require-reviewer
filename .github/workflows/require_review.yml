@@ -1,8 +1,8 @@
+# These owners will be the default owners for everything in the repo.
+# NOTE: this file auto-generated from github.com/remind101/stacks/bin/reviewers_to_github
+#       Dont edit this directly as it will be overridden :D
+#
 on: ['pull_request','pull_request_review']
-  # push:
-  #   branches-ignore:
-  #     - 'master'
-  #     - 'main'
 
 jobs:
   require_review:
@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Check
       id: require_review
-      uses: remind101/action-require-reviewer@pull_request
+      uses: remind101/action-require-reviewer@master
       with:
         whoms: june-remind101,@empire-users,aengelas
-        GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.REVIEWERS_REQUIRED_GITHUB_TOKEN }}
