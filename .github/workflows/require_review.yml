@@ -2,7 +2,11 @@
 # NOTE: this file auto-generated from github.com/remind101/stacks/bin/reviewers_to_github
 #       Dont edit this directly as it will be overridden :D
 #
-on: ['pull_request','pull_request_review']
+on:
+  pull_request:
+    types: ['opened','synchronize','reopened', 'edited']
+  pull_request_review:
+    types: ['submitted','edited','dismissed']
 
 jobs:
   require_review:
