@@ -31,10 +31,31 @@ async function getWhoms(client:InstanceType<typeof GitHub> ): Promise<string[]> 
   return flatten(whoms);
 }
 
+async function skip(client:InstanceType<typeof GitHub>) {
+  const skipList = core.getInput("SKIP").split(',').map((m) => m.trim());
+  if (skipList.length === 0) {
+    return false;
+  }
+  console.log(`Skip List: ${JSON.stringify(skipList)}`)
+  const pullRequest = await client.pulls.get({
+    owner: github.context.payload.organization.login,
+    repo: github.context.repo.repo,
+    pull_number: github.context.issue.number
+  });
+  if (pullRequest.data.body) {
+    for(var i = 0; i < skipList.length; i++) {
+      if (pullRequest.data.body.indexOf(skipList[i]) >= 0) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /**
  *
  * @param client github client
- * @param whoms 
+ * @param whoms
  */
 async function getReviews(client:InstanceType<typeof GitHub>, whoms: string[]): Promise<string[]> {
   // GITHUB_REF refs/pull/:prNumber/merge
@@ -50,6 +71,10 @@ async function getReviews(client:InstanceType<typeof GitHub>, whoms: string[]): 
 
 async function main() {
   const client = getOctokitClient();
+  if (await skip(client)) {
+    console.log('Skipping, matched skip term within pull body');
+    process.exit(0);
+  }
   const whoms = await getWhoms(client);
   console.log('who is expected to review:', whoms);
   const reviewers = await getReviews(client, whoms);

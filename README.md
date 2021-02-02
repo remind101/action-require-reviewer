@@ -12,6 +12,10 @@ Check for a user/group to have reviewed a pull request
 
 **Required** A token with the following permissions is required for organization related checks: `read:org` and `repo:status`
 
+### `SKIP`
+
+A common separated list of text to match in the pull body, which will skip this action if found.
+
 ## Outputs
 
 ### `missing`
@@ -33,6 +37,7 @@ jobs:
     - name: Check reviewers
       uses: remind101/action-require-reviewer@v1
       with:
-        whoms: user,@team
+        whoms: "user,@team"
+        skip: "skip-review","skipreview"
         GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
 ```
