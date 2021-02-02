@@ -14,4 +14,5 @@ jobs:
       uses: remind101/action-require-reviewer@master
       with:
         whoms: june-remind101,@empire-users,aengelas
+        skip: skip-review,skipreview
         GITHUB_TOKEN: ${{ secrets.REVIEWERS_REQUIRED_GITHUB_TOKEN }}
