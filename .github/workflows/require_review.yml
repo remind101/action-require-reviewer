@@ -2,7 +2,11 @@
 # NOTE: this file auto-generated from github.com/remind101/stacks/bin/reviewers_to_github
 #       Dont edit this directly as it will be overridden :D
 #
-on: ['pull_request','pull_request_review']
+on:
+  pull_request:
+    types: ['opened','synchronize','reopened', 'edited']
+  pull_request_review:
+    types: ['submitted','edited','dismissed']
 
 jobs:
   require_review:
@@ -11,7 +15,8 @@ jobs:
     steps:
     - name: Check
       id: require_review
-      uses: remind101/action-require-reviewer@master
+      uses: remind101/action-require-reviewer@js-skip
       with:
         whoms: june-remind101,@empire-users,aengelas
+        skip: skip-review,skipreview
         GITHUB_TOKEN: ${{ secrets.REVIEWERS_REQUIRED_GITHUB_TOKEN }}

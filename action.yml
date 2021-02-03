@@ -7,6 +7,9 @@ inputs:
   whoms:  # comma list of reviewers required
     description: 'Comma separated list of reviewers'
     required: true
+  skip:
+    description: "Comma separated list of phrases that skip this action"
+    required: false
 outputs:
   missing:
     description: 'Missing reviewers'
