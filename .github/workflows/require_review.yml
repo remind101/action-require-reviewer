@@ -4,7 +4,7 @@
 #
 on:
   pull_request:
-    types: ['opened','synchronize','reopened', 'edited']
+    types: ['opened','synchronize','reopened','edited','labeled','unlabeled']
   pull_request_review:
     types: ['submitted','edited','dismissed']
 

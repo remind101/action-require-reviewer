@@ -31,7 +31,11 @@ Missing reviews from
 Add an auth token with the correct permissions (see above) to your secrets as `AUTH_GITHUB_TOKEN`
 
 ```
-on: ['pull_request','pull_request_review]
+on:
+  pull_request:
+    types: ['opened','synchronize','reopened','edited','labeled','unlabeled']
+  pull_request_review:
+    types: ['submitted','edited','dismissed']
 
 jobs:
   require_review:
