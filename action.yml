@@ -10,6 +10,9 @@ inputs:
   skip:
     description: "Comma separated list of phrases that skip this action"
     required: false
+  skip_label:
+    description: "Label to check for to skip this action"
+    required: false
 outputs:
   missing:
     description: 'Missing reviewers'

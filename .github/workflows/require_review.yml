@@ -4,7 +4,7 @@
 #
 on:
   pull_request:
-    types: ['opened','synchronize','reopened', 'edited']
+    types: ['opened','synchronize','reopened','edited','labeled','unlabeled']
   pull_request_review:
     types: ['submitted','edited','dismissed']
 
@@ -15,8 +15,9 @@ jobs:
     steps:
     - name: Check
       id: require_review
-      uses: remind101/action-require-reviewer@main
+      uses: remind101/action-require-reviewer@js-skip-with-label
       with:
         whoms: june-remind101,@empire-users,aengelas
         skip: skip-review,skipreview
+        skip_label: skip-review
         GITHUB_TOKEN: ${{ secrets.REVIEWERS_REQUIRED_GITHUB_TOKEN }}
