@@ -61,7 +61,11 @@ async function hasSkip(client:InstanceType<typeof GitHub>) {
 }
 
 async function hasSkipLabel(client:InstanceType<typeof GitHub>) {
-  const skipLabel = core.getInput("SKIP_LABEL").trim();
+  const skipLabel = core.getInput("SKIP_LABEL", {}).trim();
+  if (skipLabel === undefined || skipLabel.length === 0) {
+    return false;
+  }
+  console.log(`Skip Label: ${skipLabel}`);
   const pullRequest = await client.pulls.get({
     owner: github.context.payload.organization.login,
     repo: github.context.repo.repo,
