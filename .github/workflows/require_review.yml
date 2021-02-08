@@ -19,5 +19,5 @@ jobs:
       with:
         whoms: june-remind101,@empire-users,aengelas
         skip: skip-review,skipreview
-        skip-label: skip-review
+        skip_label: skip-review
         GITHUB_TOKEN: ${{ secrets.REVIEWERS_REQUIRED_GITHUB_TOKEN }}
