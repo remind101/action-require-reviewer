@@ -16,6 +16,10 @@ Check for a user/group to have reviewed a pull request
 
 A common separated list of text to match in the pull body, which will skip this action if found.
 
+### `SKIP_LABEL`
+
+A single tag name that will skip verifiying this PR
+
 ## Outputs
 
 ### `missing`
@@ -39,5 +43,6 @@ jobs:
       with:
         whoms: "user,@team"
         skip: "skip-review","skipreview"
+        skip_tag: "skip-review"
         GITHUB_TOKEN: ${{ secrets.AUTH_GITHUB_TOKEN }}
 ```

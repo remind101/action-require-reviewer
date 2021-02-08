@@ -1,7 +1,7 @@
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import { context, GitHub } from '@actions/github/lib/utils';
-import { flatten, intersection } from 'lodash';
+import { flatten, intersection, pull } from 'lodash';
 
 /**
  * Get the github client with auth
@@ -32,6 +32,14 @@ async function getWhoms(client:InstanceType<typeof GitHub> ): Promise<string[]> 
 }
 
 async function skip(client:InstanceType<typeof GitHub>) {
+  const checks = await Promise.all([
+    hasSkip(client),
+    hasSkipLabel(client)
+  ]);
+  return checks.indexOf(true) >= 0;
+}
+
+async function hasSkip(client:InstanceType<typeof GitHub>) {
   const skipList = core.getInput("SKIP").split(',').map((m) => m.trim());
   if (skipList.length === 0) {
     return false;
@@ -49,6 +57,24 @@ async function skip(client:InstanceType<typeof GitHub>) {
       }
     }
   }
+  return false;
+}
+
+async function hasSkipLabel(client:InstanceType<typeof GitHub>) {
+  const skipLabel = core.getInput("SKIP_LABEL").trim();
+  const pullRequest = await client.pulls.get({
+    owner: github.context.payload.organization.login,
+    repo: github.context.repo.repo,
+    pull_number: github.context.issue.number
+  });
+  const labels = pullRequest.data.labels;
+  for(let i = 0; i < labels.length; i++) {
+    const label = labels[i];
+    if (label.name === skipLabel) {
+      return true;
+    }
+  }
+
   return false;
 }
 

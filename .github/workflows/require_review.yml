@@ -15,7 +15,7 @@ jobs:
     steps:
     - name: Check
       id: require_review
-      uses: remind101/action-require-reviewer@main
+      uses: remind101/action-require-reviewer@js-skip-with-label
       with:
         whoms: june-remind101,@empire-users,aengelas
         skip: skip-review,skipreview
